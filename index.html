@@ -15,9 +15,9 @@
                 <button id="buttonSetting" class="buttonSetting button defaultText">Налаштування</button>
                 <button class="exit button defaultText">Вийти</button>
             </div>
-            <div class="chat">
+            <div class="chat" id="chat">
                 <div class="message defaultText">
-                    Я: Добрый день! <br>
+                    Я: Добрый день!
                     <time>18:45</time>
                 </div>
                 <div class="message defaultText">
@@ -32,9 +32,9 @@
 
             <div class="search-form">
                 <label>
-                    <input class="input" type="text" autocomplete="off" placeholder="Сповіщення...">
+                    <input class="input" id="messageInputField" type="text" autocomplete="off" placeholder="Сповіщення...">
                 </label>
-                <button type="submit" class="submit"></button>
+                <button type="submit" class="submit" id="buttonSendingMessage"></button>
             </div>
         </div>
     </main>
@@ -60,7 +60,10 @@
 
 
 <template id="templateMessage">
-
+    <div class="message defaultText">
+        <div></div>
+        <time></time>
+    </div>
 </template>
 </body>
 </html>

@@ -1,25 +1,34 @@
-export const tabs = {
-    main: document.getElementById('main'),
-    setting: document.getElementById('setting'),
-};
-
-const UI_ELEMENTS = {
+export const UI_ELEMENTS = {
     SETTING: {
-        button: document.getElementById('buttonSetting'),
-        closeSetting: document.getElementById('closeSetting'),
+        BUTTON: document.getElementById('buttonSetting'),
+        CLOSE_SETTING: document.getElementById('closeSetting'),
     },
+    CHAT: document.getElementById('chat'),
+    MESSAGE: {
+        INPUT_FIELD: document.getElementById('messageInputField'),
+        BUTTON: document.getElementById('buttonSendingMessage'),
+    },
+    TEMPLATE: {
+        MESSAGE: document.getElementById('templateMessage'),
+    }
+
 };
 
-UI_ELEMENTS.SETTING.button.addEventListener('click', switchOnTabSetting);
-UI_ELEMENTS.SETTING.closeSetting.addEventListener('click', switchOnMainTab);
+export const TABS = {
+    MAIN: document.getElementById('main'),
+    SETTING: document.getElementById('setting'),
+};
+
+UI_ELEMENTS.SETTING.BUTTON.addEventListener('click', switchOnTabSetting);
+UI_ELEMENTS.SETTING.CLOSE_SETTING.addEventListener('click', switchOnMainTab);
 
 function switchOnTabSetting() {
-    tabs.main.style.display = 'none';
-    tabs.setting.style.display = 'flex';
+    TABS.MAIN.style.display = 'none';
+    TABS.SETTING.style.display = 'flex';
 }
 
 function switchOnMainTab() {
-    tabs.setting.style.display = 'none';
-    tabs.main.style.display = 'flex';
+    TABS.SETTING.style.display = 'none';
+    TABS.MAIN.style.display = 'flex';
 }
 
