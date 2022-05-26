@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer type="module" src="./js/main.js"></script>
+</head>
+<body>
+<div class="display">
+    <!--    MAIN TAB    -->
+    <main id="main" class="main">
+        <div class="container">
+            <div class="buttons">
+                <button id="buttonSetting" class="buttonSetting button defaultText">Налаштування</button>
+                <button class="exit button defaultText">Вийти</button>
+            </div>
+            <div class="chat">
+                <div class="message defaultText">
+                    Я: Добрый день! <br>
+                    <time>18:45</time>
+                </div>
+                <div class="message defaultText">
+                    Я: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cum delectus
+                    dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui. Corporis
+                    deserunt itaque nihil perspiciatis!
+                    <time>18:45</time>
+                </div>
+                <!--            todo: add message from companion-->
+                <!--            todo: scroll-->
+            </div>
+
+            <div class="search-form">
+                <label>
+                    <input class="input" type="text" autocomplete="off" placeholder="Сповіщення...">
+                </label>
+                <button type="submit" class="submit"></button>
+            </div>
+        </div>
+    </main>
+
+    <!--   SETTING TAB  -->
+    <div class="setting" id="setting" style="display: none">
+        <div class="setting__popup">
+            <div class="row">
+                <header class="defaultText">Налаштування</header>
+                <button id="closeSetting" class="row__close"></button>
+            </div>
+            <div class="row defaultText">Імʼя в чаті</div>
+
+            <div class="selectName">
+                <label>
+                    <input class="input input__setting-name" type="text" autocomplete="off" placeholder="Імʼя">
+                </label>
+                <button type="submit" class="submit"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<template id="templateMessage">
+
+</template>
+</body>
+</html>
