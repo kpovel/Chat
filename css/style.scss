@@ -44,6 +44,9 @@ body {
     align-items: flex-end;
     flex-direction: column;
     overflow: scroll;
+    &__messages{
+        //overflow: auto;
+    }
 }
 
 .message {
@@ -55,6 +58,8 @@ body {
 
     max-width: 270px;
     min-height: 46px;
+
+    //todo: fix height message
 
     background: #E5E5E5;
     margin: 0 8px 8px 0;

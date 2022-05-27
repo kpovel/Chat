@@ -45,7 +45,6 @@ body {
   flex-direction: column;
   overflow: scroll;
 }
-
 .message {
   display: flex;
   justify-content: space-evenly;

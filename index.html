@@ -16,23 +16,25 @@
                 <button class="exit button defaultText">Вийти</button>
             </div>
             <div class="chat" id="chat">
-                <div class="message defaultText">
-                    Я: Добрый день!
-                    <time>18:45</time>
+                <div class="chat__messages">
+                    <div class="message defaultText">
+                        Я: Добрый день!
+                        <time>18:45</time>
+                    </div>
+                    <div class="message defaultText">
+                        Я: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cum delectus
+                        dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui. Corporis
+                        deserunt itaque nihil perspiciatis!
+                        <time>18:45</time>
+                    </div>
+                    <!--            todo: add message from companion-->
+                    <!--            todo: scroll-->
                 </div>
-                <div class="message defaultText">
-                    Я: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cum delectus
-                    dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui. Corporis
-                    deserunt itaque nihil perspiciatis!
-                    <time>18:45</time>
-                </div>
-                <!--            todo: add message from companion-->
-                <!--            todo: scroll-->
             </div>
-
             <div class="search-form">
                 <label>
-                    <input class="input" id="messageInputField" type="text" autocomplete="off" placeholder="Сповіщення...">
+                    <input class="input" id="messageInputField" type="text" autocomplete="off"
+                           placeholder="Сповіщення...">
                 </label>
                 <button type="submit" class="submit" id="buttonSendingMessage"></button>
             </div>
