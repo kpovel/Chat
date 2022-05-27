@@ -72,25 +72,44 @@ body {
 }
 
 .input {
-    width: 261px;
-    height: 28px;
     border: 1px solid #000000;
     outline: none;
 
+    &__base {
+        height: 28px;
+        width: 261px;
+    }
+
     &__setting-name {
         width: 207px;
+        height: 28px;
     }
+
+    &__data {
+        width: 239px;
+        height: 28px;
+        margin: 0 0 7px;
+    }
+
 }
 
 .submit {
     border: 1px solid #000000;
-    background: #ffffff url("../img/sendArrow.svg") no-repeat center;
-    width: 29px;
-    height: 32px;
+
+    &__arrow {
+        background: #ffffff url("../img/sendArrow.svg") no-repeat center;
+        width: 29px;
+        height: 32px;
+    }
+
+    &__text {
+        height: 34px;
+        background: #FFFFFF;
+    }
 }
 
 
-.setting {
+.setting, .authorization {
     width: 320px;
     height: 533px;
     background-color: #535353;
@@ -118,12 +137,20 @@ body {
         border: none;
         cursor: pointer;
     }
+
+    &__name-data {
+        margin-top: 70px;
+    }
 }
 
 .selectName {
     margin: 14px;
     display: flex;
     justify-content: space-between;
+}
+
+.data-entry {
+    margin: 14px;
 }
 
 .selectedTab {
