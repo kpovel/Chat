@@ -3,7 +3,7 @@ export const UI_ELEMENTS = {
         BUTTON: document.getElementById('buttonSetting'),
         CLOSE_SETTING: document.getElementById('closeSetting'),
     },
-    CHAT: document.getElementById('chat'),
+    CHAT: document.getElementById('chat__messages'),
     MESSAGE: {
         INPUT_FIELD: document.getElementById('messageInputField'),
         BUTTON: document.getElementById('buttonSendingMessage'),
@@ -11,7 +11,6 @@ export const UI_ELEMENTS = {
     TEMPLATE: {
         MESSAGE: document.getElementById('templateMessage'),
     }
-
 };
 
 export const TABS = {

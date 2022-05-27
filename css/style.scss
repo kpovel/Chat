@@ -39,28 +39,26 @@ body {
     width: 302px;
     height: 437px;
     margin: 0 auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex-direction: column;
-    overflow: scroll;
-    &__messages{
-        //overflow: auto;
+    display: grid;
+    overflow: auto;
+
+    &__messages {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-direction: column;
+        margin: 8px 0 0 0;
     }
 }
 
 .message {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-end;
 
     max-width: 270px;
     min-height: 46px;
-
-    //todo: fix height message
-
     background: #E5E5E5;
     margin: 0 8px 8px 0;
     padding: 8px;
@@ -78,7 +76,8 @@ body {
     height: 28px;
     border: 1px solid #000000;
     outline: none;
-    &__setting-name{
+
+    &__setting-name {
         width: 207px;
     }
 }
@@ -111,6 +110,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 14px;
+
     &__close {
         background: url("../img/buttonClose.svg") no-repeat center;
         width: 16px;
@@ -120,12 +120,12 @@ body {
     }
 }
 
-.selectName{
+.selectName {
     margin: 14px;
     display: flex;
     justify-content: space-between;
 }
 
-.selectedTab{
+.selectedTab {
     display: block;
 }

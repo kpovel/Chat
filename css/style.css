@@ -39,15 +39,19 @@ body {
   width: 302px;
   height: 437px;
   margin: 0 auto;
+  display: grid;
+  overflow: auto;
+}
+.chat__messages {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column;
-  overflow: scroll;
+  margin: 8px 0 0 0;
 }
+
 .message {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-end;
