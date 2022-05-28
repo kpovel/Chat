@@ -17,17 +17,24 @@
             </div>
             <div class="chat" id="chat">
                 <div class="chat__messages" id="chat__messages">
-                    <div class="message defaultText">
-                        Я: Добрий день!
-                        <time>18:45</time>
+                    <div class="received-message">
+                        <div class="message message__get defaultText">
+                            Компаньйон: Добрий день!
+                            <time>18:45</time>
+                        </div>
+
                     </div>
-                    <div class="message defaultText">
-                        Я: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cum delectus
-                        dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui. Corporis
-                        deserunt itaque nihil perspiciatis!
-                        <time>18:45</time>
+                    <div class="received-message">
+                        <div class="message message__get defaultText">
+                            Компаньйон: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
+                            cum
+                            delectus
+                            dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui.
+                            Corporis
+                            deserunt itaque nihil perspiciatis!
+                            <time>18:45</time>
+                        </div>
                     </div>
-                    <!--            todo: add message from companion-->
                     <!--                    todo: when send message show that message-->
                 </div>
             </div>
@@ -97,11 +104,21 @@
 </div>
 
 
-<template id="templateMessage">
-    <div class="message defaultText">
+<template id="templateMyMessage">
+    <div class="message message__sent defaultText">
         <div></div>
         <time></time>
     </div>
 </template>
+
+<template id="templateCompanionMessage">
+    <div class="received-message">
+        <div class="message message__get defaultText">
+            <div></div>
+            <time></time>
+        </div>
+    </div>
+</template>
+
 </body>
 </html>
