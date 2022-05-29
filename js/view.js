@@ -1,9 +1,27 @@
-import format from 'date-fns/format';
+import {getCode, logInChat} from './main.js';
 
 export const UI_ELEMENTS = {
+    TABS: {
+        MAIN: document.getElementById('main'),
+        SETTING: document.getElementById('setting'),
+        AUTHORISATION: document.getElementById('authorisation'),
+        CONFIRMATION: document.getElementById('confirmation'),
+    },
     SETTING: {
         BUTTON: document.getElementById('buttonSetting'),
         CLOSE_SETTING: document.getElementById('closeSetting'),
+    },
+
+    AUTHORISATION: {
+        BUTTON: document.getElementById('authorisationButton'),
+        CLOSE_TAB: document.getElementById('closeAuthorisation'),
+        MAIL: document.getElementById('mail'),
+        GET_CODE: document.getElementById('getCode'),
+    },
+    CONFIRMATION: {
+        CLOSE_TAB: document.getElementById('closeConfirmation'),
+        ENTER_CODE: document.getElementById('code'),
+        LOG_IN_CHAT: document.getElementById('logInToChat'),
     },
     CHAT: document.getElementById('chat__messages'),
     MESSAGE: {
@@ -11,35 +29,42 @@ export const UI_ELEMENTS = {
         BUTTON: document.getElementById('buttonSendingMessage'),
     },
     TEMPLATE: {
-        MESSAGE: document.getElementById('templateMessage'),
+        MY_MESSAGE: document.getElementById('templateMyMessage'),
+        COMPANION_MESSAGE: document.getElementById('templateCompanionMessage'),
     }
-};
-
-export const TABS = {
-    MAIN: document.getElementById('main'),
-    SETTING: document.getElementById('setting'),
 };
 
 UI_ELEMENTS.SETTING.BUTTON.addEventListener('click', switchOnTabSetting);
 UI_ELEMENTS.SETTING.CLOSE_SETTING.addEventListener('click', switchOnMainTab);
+UI_ELEMENTS.AUTHORISATION.BUTTON.addEventListener('click', switchOnAuthorisationTab);
+UI_ELEMENTS.AUTHORISATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
+UI_ELEMENTS.AUTHORISATION.GET_CODE.addEventListener('click', getCode);
+// todo: send code when press enter
+UI_ELEMENTS.CONFIRMATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
+UI_ELEMENTS.CONFIRMATION.LOG_IN_CHAT.addEventListener('click', logInChat);
+
+
 
 function switchOnTabSetting() {
-    TABS.MAIN.style.display = 'none';
-    TABS.SETTING.style.display = 'flex';
+    UI_ELEMENTS.TABS.MAIN.style.display = 'none';
+    UI_ELEMENTS.TABS.SETTING.style.display = 'flex';
 }
 
-function switchOnMainTab() {
-    TABS.SETTING.style.display = 'none';
-    TABS.MAIN.style.display = 'flex';
+export function switchOnMainTab() {
+    UI_ELEMENTS.TABS.SETTING.style.display = 'none';
+    UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'none';
+    UI_ELEMENTS.TABS.CONFIRMATION.style.display = 'none';
+    UI_ELEMENTS.TABS.MAIN.style.display = 'flex';
 }
 
-export function sendMessage() {
-    const message = UI_ELEMENTS.MESSAGE.INPUT_FIELD.value;
-    const templateElement = UI_ELEMENTS.TEMPLATE.MESSAGE.content.cloneNode(true);
-    if (message) {
-        templateElement.firstElementChild.firstElementChild.textContent = `Я: ${message}`;
-        templateElement.firstElementChild.lastElementChild.textContent = format(new Date(), 'HH:mm');
-        UI_ELEMENTS.CHAT.append(templateElement);
-        UI_ELEMENTS.MESSAGE.INPUT_FIELD.value = null;
-    }
+function switchOnAuthorisationTab() {
+    UI_ELEMENTS.TABS.MAIN.style.display = 'none';
+    UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'flex';
 }
+
+export function switchOnConfirmationTab() {
+    UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'none';
+    UI_ELEMENTS.TABS.CONFIRMATION.style.display = 'flex';
+}
+
+

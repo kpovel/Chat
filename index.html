@@ -13,7 +13,7 @@
         <div class="container">
             <div class="buttons">
                 <button id="buttonSetting" class="buttonSetting button defaultText">Налаштування</button>
-                <button class="exit button defaultText">Вийти</button>
+                <button id="authorisationButton" class="exit button defaultText">Увійти</button>
             </div>
             <div class="chat" id="chat">
                 <div class="chat__messages" id="chat__messages">
@@ -67,37 +67,37 @@
     </div>
 
     <!--    AUTHORIZATION  -->
-    <div class="authorization" style="display: none">
+    <div id="authorisation" class="authorization" style="display: none">
         <div class="authorization__popup">
             <div class="row">
                 <header class="defaultText">Авторизація</header>
-                <button class="row__close"></button>
+                <button id="closeAuthorisation" class="row__close"></button>
             </div>
             <div class="row row__name-data defaultText">Пошта:</div>
 
             <div class="data-entry">
                 <label>
-                    <input class="input input__authorization" type="text" autocomplete="off">
+                    <input id="mail" class="input input__data" type="text" autocomplete="off">
                 </label>
-                <button type="submit" class="submit submit__text defaultText">Отримати код</button>
+                <button id="getCode" type="submit" class="submit submit__text defaultText">Отримати код</button>
             </div>
         </div>
     </div>
 
     <!--    CONFIRMATION-->
-    <div class="authorization" style="display: none">
+    <div id="confirmation" class="authorization" style="display: none">
         <div class="authorization__popup">
             <div class="row">
                 <header class="defaultText">Підтвердження</header>
-                <button class="row__close"></button>
+                <button id="closeConfirmation" class="row__close"></button>
             </div>
             <div class="row row__name-data defaultText">Код:</div>
 
             <div class="data-entry">
                 <label>
-                    <input class="input input__data" type="text" autocomplete="off">
+                    <input id="code" class="input input__data" type="text" autocomplete="off">
                 </label>
-                <button type="submit" class="submit submit__text defaultText">Отримати код</button>
+                <button id="logInToChat" type="submit" class="submit submit__text defaultText">Увійти</button>
             </div>
         </div>
     </div>
