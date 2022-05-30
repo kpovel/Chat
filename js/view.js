@@ -1,4 +1,4 @@
-import {getCode, logInChat} from './main.js';
+import {getCode, saveToken, setName} from './main.js';
 
 export const UI_ELEMENTS = {
     TABS: {
@@ -10,6 +10,8 @@ export const UI_ELEMENTS = {
     SETTING: {
         BUTTON: document.getElementById('buttonSetting'),
         CLOSE_SETTING: document.getElementById('closeSetting'),
+        USER_NAME: document.getElementById('userName'),
+        SET_NAME: document.getElementById('setName'),
     },
 
     AUTHORISATION: {
@@ -41,8 +43,8 @@ UI_ELEMENTS.AUTHORISATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
 UI_ELEMENTS.AUTHORISATION.GET_CODE.addEventListener('click', getCode);
 // todo: send code when press enter
 UI_ELEMENTS.CONFIRMATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
-UI_ELEMENTS.CONFIRMATION.LOG_IN_CHAT.addEventListener('click', logInChat);
-
+UI_ELEMENTS.CONFIRMATION.LOG_IN_CHAT.addEventListener('click', saveToken);
+UI_ELEMENTS.SETTING.SET_NAME.addEventListener('click', setName);
 
 
 function switchOnTabSetting() {
