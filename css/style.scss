@@ -41,6 +41,7 @@ body {
     margin: 0 auto;
     display: grid;
     overflow: auto;
+    word-break: break-all;
 
     &__messages {
         display: flex;

@@ -18,7 +18,8 @@ function sendMessageToChat() {
     if (message) {
         templateElement.firstElementChild.firstElementChild.textContent = `${Cookies.get('userName')}: ${message}`;
         templateElement.firstElementChild.lastElementChild.textContent = format(new Date(), 'HH:mm');
-        UI_ELEMENTS.CHAT.append(templateElement);
+        UI_ELEMENTS.CHAT_MESSAGES.append(templateElement);
+        UI_ELEMENTS.CHAT.scrollTop += UI_ELEMENTS.CHAT.scrollHeight;
         UI_ELEMENTS.MESSAGE.INPUT_FIELD.value = null;
     }
 }
@@ -88,5 +89,30 @@ async function getDataAboutUser() {
     }
     catch (e) {
         console.log(e);
+    }
+}
+
+async function getMessages() {
+    try {
+        const response = await fetch('https://mighty-cove-31255.herokuapp.com/api/messages');
+        const messages = await response.json();
+
+        await displayChatMessages(messages.messages);
+        console.log(messages);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+getMessages();
+
+async function displayChatMessages(messages) {
+    for (const message of messages) {
+        const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
+        templateMessages.firstElementChild.firstElementChild.firstElementChild.textContent = `${message.user.name}: ${message.text}`;
+        templateMessages.firstElementChild.firstElementChild.lastElementChild.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+        UI_ELEMENTS.CHAT_MESSAGES.append(templateMessages);
+        UI_ELEMENTS.CHAT.scrollTop += UI_ELEMENTS.CHAT.scrollHeight;
     }
 }

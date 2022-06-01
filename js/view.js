@@ -25,7 +25,8 @@ export const UI_ELEMENTS = {
         ENTER_CODE: document.getElementById('code'),
         LOG_IN_CHAT: document.getElementById('logInToChat'),
     },
-    CHAT: document.getElementById('chat__messages'),
+    CHAT_MESSAGES: document.getElementById('chat__messages'),
+    CHAT: document.getElementById('chat'),
     MESSAGE: {
         INPUT_FIELD: document.getElementById('messageInputField'),
         BUTTON: document.getElementById('buttonSendingMessage'),
