@@ -2,8 +2,13 @@ import {UI_ELEMENTS, switchOnConfirmationTab, switchOnMainTab} from './view.js';
 import format from 'date-fns/format';
 import Cookies from 'js-cookie';
 
-
 const URL = 'https://mighty-cove-31255.herokuapp.com/api/user';
+const socket = new WebSocket(`ws://mighty-cove-31255.herokuapp.com/websockets?${Cookies.get('token')}`);
+
+socket.onmessage = function (event) {
+    displayChatMessages([JSON.parse(event.data)]);
+};
+
 
 UI_ELEMENTS.MESSAGE.INPUT_FIELD.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
@@ -14,16 +19,19 @@ UI_ELEMENTS.MESSAGE.BUTTON.addEventListener('click', sendMessageToChat);
 
 function sendMessageToChat() {
     const message = UI_ELEMENTS.MESSAGE.INPUT_FIELD.value;
-    const templateElement = UI_ELEMENTS.TEMPLATE.MY_MESSAGE.content.cloneNode(true);
     if (message) {
-        templateElement.firstElementChild.firstElementChild.textContent = `${Cookies.get('userName')}: ${message}`;
-        templateElement.firstElementChild.lastElementChild.textContent = format(new Date(), 'HH:mm');
-        UI_ELEMENTS.CHAT_MESSAGES.append(templateElement);
-        UI_ELEMENTS.CHAT.scrollTop += UI_ELEMENTS.CHAT.scrollHeight;
         UI_ELEMENTS.MESSAGE.INPUT_FIELD.value = null;
+        sendMessageToServer(message);
     }
 }
 
+async function sendMessageToServer(message) {
+    socket.send(JSON.stringify({
+        text: message,
+    }));
+
+
+}
 
 export async function getCode() {
     const email = UI_ELEMENTS.AUTHORISATION.MAIL.value;
@@ -95,24 +103,45 @@ async function getDataAboutUser() {
 async function getMessages() {
     try {
         const response = await fetch('https://mighty-cove-31255.herokuapp.com/api/messages');
-        const messages = await response.json();
+        const data = await response.json();
 
-        await displayChatMessages(messages.messages);
-        console.log(messages);
+        await displayChatMessages(data.messages);
+        console.log(data);
     }
     catch (e) {
         console.log(e);
     }
 }
 
-getMessages();
-
 async function displayChatMessages(messages) {
     for (const message of messages) {
-        const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
-        templateMessages.firstElementChild.firstElementChild.firstElementChild.textContent = `${message.user.name}: ${message.text}`;
-        templateMessages.firstElementChild.firstElementChild.lastElementChild.textContent = format(Date.parse(message.createdAt), 'HH:mm');
-        UI_ELEMENTS.CHAT_MESSAGES.append(templateMessages);
+        if (message.user.email === Cookies.get('email')) {
+            const templateMyMessage = UI_ELEMENTS.TEMPLATE.MY_MESSAGE.content.cloneNode(true);
+            const {
+                firstElementChild: {
+                    firstElementChild: textMessage,
+                    lastElementChild: dataMessage,
+                }
+            } = templateMyMessage;
+            textMessage.textContent = `${message.user.name}: ${message.text}`;
+            dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+            UI_ELEMENTS.CHAT_MESSAGES.append(templateMyMessage);
+        } else {
+            const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
+            const {
+                firstElementChild: {
+                    firstElementChild: {
+                        firstElementChild: textMessage,
+                        lastElementChild: dataMessage,
+                    }
+                }
+            } = templateMessages;
+            textMessage.textContent = `${message.user.name}: ${message.text}`;
+            dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+            UI_ELEMENTS.CHAT_MESSAGES.append(templateMessages);
+        }
         UI_ELEMENTS.CHAT.scrollTop += UI_ELEMENTS.CHAT.scrollHeight;
     }
 }
+
+getMessages();

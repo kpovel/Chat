@@ -16,30 +16,11 @@
                 <button id="authorisationButton" class="exit button defaultText">Увійти</button>
             </div>
             <div class="chat" id="chat">
-                <div class="chat__messages" id="chat__messages">
-                    <div class="received-message">
-                        <div class="message message__get defaultText">
-                            Компаньйон: Добрий день!
-                            <time>18:45</time>
-                        </div>
-
-                    </div>
-                    <div class="received-message">
-                        <div class="message message__get defaultText">
-                            Компаньйон: Добрий день! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-                            cum
-                            delectus
-                            dolorum expedita ipsam libero obcaecati omnis. Dicta eius enim hic id magni optio qui.
-                            Corporis
-                            deserunt itaque nihil perspiciatis!
-                            <time>18:45</time>
-                        </div>
-                    </div>
-                </div>
+                <div class="chat__messages" id="chat__messages"></div>
             </div>
-            <div class="search-form">
+            <div class="message-sending-form">
                 <label>
-                    <input class="input input__base" id="messageInputField" type="text" autocomplete="off"
+                    <input autofocus class="input input__base" id="messageInputField" type="text" autocomplete="off"
                            placeholder="Сповіщення...">
                 </label>
                 <button type="submit" class="submit submit__arrow" id="buttonSendingMessage"></button>
@@ -58,7 +39,8 @@
 
             <div class="selectName">
                 <label>
-                    <input id="userName" class="input input__setting-name" type="text" autocomplete="off" placeholder="Імʼя">
+                    <input id="userName" class="input input__setting-name" type="text" autocomplete="off"
+                           placeholder="Імʼя">
                 </label>
                 <button id="setName" type="submit" class="submit submit__arrow"></button>
             </div>

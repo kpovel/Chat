@@ -75,7 +75,7 @@ body {
   display: flex;
 }
 
-.search-form {
+.message-sending-form {
   display: flex;
   justify-content: space-between;
   align-items: center;
