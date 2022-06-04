@@ -1,6 +1,7 @@
-import {getCode, saveToken, setName} from './main.js';
+export {UI_ELEMENTS, switchOnMainTab};
 
-export const UI_ELEMENTS = {
+const UI_ELEMENTS = {
+    BUTTONS_CLOSE: document.querySelectorAll('.row__close'),
     TABS: {
         MAIN: document.getElementById('main'),
         SETTING: document.getElementById('setting'),
@@ -17,7 +18,7 @@ export const UI_ELEMENTS = {
     AUTHORISATION: {
         BUTTON: document.getElementById('authorisationButton'),
         CLOSE_TAB: document.getElementById('closeAuthorisation'),
-        MAIL: document.getElementById('mail'),
+        EMAIL: document.getElementById('email'),
         GET_CODE: document.getElementById('getCode'),
     },
     CONFIRMATION: {
@@ -38,36 +39,18 @@ export const UI_ELEMENTS = {
 };
 
 UI_ELEMENTS.SETTING.BUTTON.addEventListener('click', switchOnTabSetting);
-UI_ELEMENTS.SETTING.CLOSE_SETTING.addEventListener('click', switchOnMainTab);
-UI_ELEMENTS.AUTHORISATION.BUTTON.addEventListener('click', switchOnAuthorisationTab);
-UI_ELEMENTS.AUTHORISATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
-UI_ELEMENTS.AUTHORISATION.GET_CODE.addEventListener('click', getCode);
-// todo: send code when press enter
-UI_ELEMENTS.CONFIRMATION.CLOSE_TAB.addEventListener('click', switchOnMainTab);
-UI_ELEMENTS.CONFIRMATION.LOG_IN_CHAT.addEventListener('click', saveToken);
-UI_ELEMENTS.SETTING.SET_NAME.addEventListener('click', setName);
-
+UI_ELEMENTS.BUTTONS_CLOSE.forEach((item) => {
+    item.addEventListener('click', switchOnMainTab);
+});
 
 function switchOnTabSetting() {
     UI_ELEMENTS.TABS.MAIN.style.display = 'none';
     UI_ELEMENTS.TABS.SETTING.style.display = 'flex';
 }
 
-export function switchOnMainTab() {
+function switchOnMainTab() {
     UI_ELEMENTS.TABS.SETTING.style.display = 'none';
     UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'none';
     UI_ELEMENTS.TABS.CONFIRMATION.style.display = 'none';
     UI_ELEMENTS.TABS.MAIN.style.display = 'flex';
 }
-
-function switchOnAuthorisationTab() {
-    UI_ELEMENTS.TABS.MAIN.style.display = 'none';
-    UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'flex';
-}
-
-export function switchOnConfirmationTab() {
-    UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'none';
-    UI_ELEMENTS.TABS.CONFIRMATION.style.display = 'flex';
-}
-
-
