@@ -1,4 +1,7 @@
-export {UI_ELEMENTS, switchOnMainTab};
+import Cookies from 'js-cookie';
+import format from 'date-fns/format';
+
+export {UI_ELEMENTS, switchOnMainTab, insertMessage};
 
 const UI_ELEMENTS = {
     BUTTONS_CLOSE: document.querySelectorAll('.row__close'),
@@ -53,4 +56,32 @@ function switchOnMainTab() {
     UI_ELEMENTS.TABS.AUTHORISATION.style.display = 'none';
     UI_ELEMENTS.TABS.CONFIRMATION.style.display = 'none';
     UI_ELEMENTS.TABS.MAIN.style.display = 'flex';
+}
+
+function insertMessage(message, method) {
+    if (message.user.email === Cookies.get('email')) {
+        const templateMyMessage = UI_ELEMENTS.TEMPLATE.MY_MESSAGE.content.cloneNode(true);
+        const {
+            firstElementChild: {
+                firstElementChild: textMessage,
+                lastElementChild: dataMessage,
+            }
+        } = templateMyMessage;
+        textMessage.textContent = `${message.user.name}: ${message.text}`;
+        dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+        UI_ELEMENTS.CHAT_MESSAGES[method](templateMyMessage);
+    } else {
+        const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
+        const {
+            firstElementChild: {
+                firstElementChild: {
+                    firstElementChild: textMessage,
+                    lastElementChild: dataMessage,
+                }
+            }
+        } = templateMessages;
+        textMessage.textContent = `${message.user.name}: ${message.text}`;
+        dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+        UI_ELEMENTS.CHAT_MESSAGES[method](templateMessages);
+    }
 }

@@ -1,5 +1,4 @@
-import {UI_ELEMENTS} from './view.js';
-import format from 'date-fns/format';
+import {UI_ELEMENTS, insertMessage} from './view.js';
 import Cookies from 'js-cookie';
 
 const socket = new WebSocket(`ws://mighty-cove-31255.herokuapp.com/websockets?${Cookies.get('token')}`);
@@ -44,35 +43,27 @@ async function getMessages() {
     }
 }
 
-async function displayChatMessages(messages) {
-    for (const message of messages) {
-        if (message.user.email === Cookies.get('email')) {
-            const templateMyMessage = UI_ELEMENTS.TEMPLATE.MY_MESSAGE.content.cloneNode(true);
-            const {
-                firstElementChild: {
-                    firstElementChild: textMessage,
-                    lastElementChild: dataMessage,
-                }
-            } = templateMyMessage;
-            textMessage.textContent = `${message.user.name}: ${message.text}`;
-            dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
-            UI_ELEMENTS.CHAT_MESSAGES.append(templateMyMessage);
-        } else {
-            const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
-            const {
-                firstElementChild: {
-                    firstElementChild: {
-                        firstElementChild: textMessage,
-                        lastElementChild: dataMessage,
-                    }
-                }
-            } = templateMessages;
-            textMessage.textContent = `${message.user.name}: ${message.text}`;
-            dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
-            UI_ELEMENTS.CHAT_MESSAGES.append(templateMessages);
-        }
+async function displayChatMessages(messages, method) {
+    if (!messages.length){
+        alert('Уся історія завантажена');
+    }
+    const bundleMessages = messages.splice(messages.length - 20);
+    const changedArr = method ? bundleMessages.reverse() : bundleMessages;
+
+    changedArr.forEach(item => {
+        insertMessage(item, method || 'append');
+    });
+
+    if (!method) {
         UI_ELEMENTS.CHAT.scrollTop += UI_ELEMENTS.CHAT.scrollHeight;
     }
+
+    UI_ELEMENTS.CHAT.addEventListener('scroll', function () {
+        if (UI_ELEMENTS.CHAT.scrollTop === 0) {
+            UI_ELEMENTS.CHAT.scrollTop += 1;
+            displayChatMessages(messages, 'prepend');
+        }
+    });
 }
 
 getMessages();
