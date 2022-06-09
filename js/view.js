@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import format from 'date-fns/format';
 
 export {UI_ELEMENTS, switchOnMainTab, insertMessage};
@@ -36,8 +35,7 @@ const UI_ELEMENTS = {
         BUTTON: document.getElementById('buttonSendingMessage'),
     },
     TEMPLATE: {
-        MY_MESSAGE: document.getElementById('templateMyMessage'),
-        COMPANION_MESSAGE: document.getElementById('templateCompanionMessage'),
+        MESSAGE: document.getElementById('templateMessage'),
     }
 };
 
@@ -58,30 +56,25 @@ function switchOnMainTab() {
     UI_ELEMENTS.TABS.MAIN.style.display = 'flex';
 }
 
-function insertMessage(message, method) {
-    if (message.user.email === Cookies.get('email')) {
-        const templateMyMessage = UI_ELEMENTS.TEMPLATE.MY_MESSAGE.content.cloneNode(true);
-        const {
+function insertMessage(message, method, myEmail) {
+    const templateMessage = UI_ELEMENTS.TEMPLATE.MESSAGE.content.cloneNode(true);
+    const isMyMessage = message.user.email === myEmail;
+    const {
+        firstElementChild: {
             firstElementChild: {
                 firstElementChild: textMessage,
                 lastElementChild: dataMessage,
             }
-        } = templateMyMessage;
-        textMessage.textContent = `${message.user.name}: ${message.text}`;
-        dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
-        UI_ELEMENTS.CHAT_MESSAGES[method](templateMyMessage);
+        }
+    } = templateMessage;
+
+    if (isMyMessage) {
+        templateMessage.firstElementChild.firstElementChild.className += ' message__sent';
     } else {
-        const templateMessages = UI_ELEMENTS.TEMPLATE.COMPANION_MESSAGE.content.cloneNode(true);
-        const {
-            firstElementChild: {
-                firstElementChild: {
-                    firstElementChild: textMessage,
-                    lastElementChild: dataMessage,
-                }
-            }
-        } = templateMessages;
-        textMessage.textContent = `${message.user.name}: ${message.text}`;
-        dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
-        UI_ELEMENTS.CHAT_MESSAGES[method](templateMessages);
+        templateMessage.firstElementChild.className = 'received-message';
+        templateMessage.firstElementChild.firstElementChild.className += ' message__get';
     }
+    textMessage.textContent = `${message.user.name}: ${message.text}`;
+    dataMessage.textContent = format(Date.parse(message.createdAt), 'HH:mm');
+    UI_ELEMENTS.CHAT_MESSAGES[method](templateMessage);
 }

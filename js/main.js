@@ -51,7 +51,7 @@ async function displayChatMessages(messages, method) {
     const changedArr = method ? bundleMessages.reverse() : bundleMessages;
 
     changedArr.forEach(item => {
-        insertMessage(item, method || 'append');
+        insertMessage(item, method || 'append', Cookies.get('email'));
     });
 
     if (!method) {
@@ -67,3 +67,4 @@ async function displayChatMessages(messages, method) {
 }
 
 getMessages();
+
